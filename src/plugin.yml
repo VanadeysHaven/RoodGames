@@ -1,0 +1,9 @@
+name: RoodGames
+version: 1.0
+description: R00DGames
+author: cooltimmetje
+depend: [TitleManager, CharsAPI, HolographicDisplays, Citizens]
+main: me.Cooltimmetje.RoodGames.Main
+commands:
+    setgame:
+        description: setgame

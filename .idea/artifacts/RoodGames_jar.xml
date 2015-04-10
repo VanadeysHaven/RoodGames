@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="RoodGames:jar">
+    <output-path>$PROJECT_DIR$/../../Minecraft/Servers/Vanilla - Minigames/plugins</output-path>
+    <root id="archive" name="RoodGames.jar">
+      <element id="module-output" name="RoodGames" />
+    </root>
+  </artifact>
+</component>
