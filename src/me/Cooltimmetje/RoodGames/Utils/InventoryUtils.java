@@ -1,9 +1,12 @@
 package me.Cooltimmetje.RoodGames.Utils;
 
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
@@ -55,5 +58,37 @@ public class InventoryUtils {
         item.setItemMeta(itemMeta);
         return item;
     }
+
+    public static void createDisplay(Material m, int amount, int data, String name, String lore, Inventory inv, int slotNumber){
+        ItemStack item = new ItemStack(m, amount,(byte) data);
+        ItemMeta itemMeta = item.getItemMeta();
+        if(!(name == null)){
+            itemMeta.setDisplayName(name.replace('&', '§'));
+        }
+        if(!(lore == null)){
+            ArrayList<String> Lore = new ArrayList<String>();
+            Lore.add(lore.replace('&', '§'));
+            itemMeta.setLore(Lore);
+        }
+        item.setItemMeta(itemMeta);
+        inv.setItem(slotNumber - 1, item);
+    }
+
+    public static ItemStack colorArmor(Material m, int amount, int data, String name, String lore, Color c){
+        ItemStack item = new ItemStack(m, amount, (byte) data);
+        LeatherArmorMeta itemMeta = (LeatherArmorMeta) item.getItemMeta();
+        itemMeta.setColor(c);
+        if(!(name == null)){
+            itemMeta.setDisplayName(name.replace('&', '§'));
+        }
+        if(!(lore == null)){
+            ArrayList<String> Lore = new ArrayList<String>();
+            Lore.add(lore.replace('&', '§'));
+            itemMeta.setLore(Lore);
+        }
+        item.setItemMeta(itemMeta);
+        return item;
+    }
+
 
 }

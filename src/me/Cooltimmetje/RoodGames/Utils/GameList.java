@@ -1,7 +1,6 @@
 package me.Cooltimmetje.RoodGames.Utils;
 
 import java.util.HashMap;
-import java.util.InputMismatchException;
 
 /**
  * This class has been created on 10-4-2015 at 19:21 by cooltimmetje.

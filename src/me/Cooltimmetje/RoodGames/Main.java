@@ -1,8 +1,9 @@
 package me.Cooltimmetje.RoodGames;
 
 import me.Cooltimmetje.RoodGames.Commands.GameChangeCmd;
-import me.Cooltimmetje.RoodGames.Listener.JoinQuitEvent;
-import me.Cooltimmetje.RoodGames.Listener.MysteryChest;
+import me.Cooltimmetje.RoodGames.Commands.ReloadStatuesCommand;
+import me.Cooltimmetje.RoodGames.Commands.ResetInventory;
+import me.Cooltimmetje.RoodGames.Listener.*;
 import me.Cooltimmetje.RoodGames.Utils.GameList;
 import me.Cooltimmetje.RoodGames.Utils.LobbyUtils;
 import org.bukkit.Bukkit;
@@ -28,10 +29,13 @@ public class Main extends JavaPlugin {
         GameList.listGames();
 
         getLogger().info("[R00DGames] Registering Events...");
-        registerEvents(this, new MysteryChest(), new JoinQuitEvent());
+        registerEvents(this, new MysteryBox(), new JoinQuitEvent(), new QuestMaster(), new BeaconColor(), new StaffNpcMount(), new MysteryBoxInfo());
 
         getLogger().info("[R00DGames] Registering Commands...");
         getCommand("setgame").setExecutor(new GameChangeCmd());
+        getCommand("reloadstatues").setExecutor(new ReloadStatuesCommand());
+        getCommand("resetinv").setExecutor(new ResetInventory());
+        getCommand("createbeacon").setExecutor(new BeaconColor());
 
         getLogger().info("[R00DGames] Hooking into APIs...");
         if (getServer().getPluginManager().getPlugin("TitleManager") != null && getServer().getPluginManager().getPlugin("TitleManager").isEnabled())

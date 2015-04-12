@@ -7,3 +7,9 @@ main: me.Cooltimmetje.RoodGames.Main
 commands:
     setgame:
         description: setgame
+    reloadstatues:
+        description: reloadstatues
+    resetinv:
+        description: resetinv
+    createbeacon:
+        description: createbeacon

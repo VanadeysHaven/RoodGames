@@ -1,5 +1,6 @@
 package me.Cooltimmetje.RoodGames.Listener;
 
+import me.Cooltimmetje.RoodGames.Utils.ChatUtils;
 import me.Cooltimmetje.RoodGames.Utils.InventoryUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,7 +15,11 @@ public class JoinQuitEvent implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event){
         Player p = event.getPlayer();
-        InventoryUtils.setInventory(p);
+        if(!p.isOp()) {
+            InventoryUtils.setInventory(p);
+        } else {
+            ChatUtils.msgPlayer("&eSince you are a OP, your inventory was not reset on join. You can do &o/resetinv &eif you wish to reset your inventory!", p);
+        }
     }
 
 }

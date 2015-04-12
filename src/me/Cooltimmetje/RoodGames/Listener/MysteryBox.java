@@ -11,7 +11,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 /**
  * This class has been created on 10-4-2015 at 21:05 by cooltimmetje.
  */
-public class MysteryChest implements Listener {
+public class MysteryBox implements Listener {
 
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
