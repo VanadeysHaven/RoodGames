@@ -16,6 +16,7 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
 import pl.merbio.charsapi.objects.CharsBuilder;
 import pl.merbio.charsapi.objects.CharsString;
@@ -256,9 +257,59 @@ public class LobbyUtils {
     }
 
     public static void setGame(int game, Player p) { //TODO: Make statement working
+        if(game > 0 && game <= GameList.gameAmount){
+            gameNameText.clearChars(true);
+            gameNameText = gameName.replace("$l#c&d" + GameList.idGame.get(game));
+            gameNameText = gameName.build(centerLobby.getLocation().add(0, 10 , -50), gameNameText);
+            ChatUtils.broadcastMsg("&6&l" + p.getName() + " &e&lchanged the game to &6&l" + GameList.idGame.get(game));
+        } else {
+            ChatUtils.msgPlayer("&cThis is not a valid game!", p);
+        }
     }
 
     public static void reloadStatues() { //TODO: Make statement working
+        for(Integer i : statueNPCs.keySet()){
+            NPC npc = statueNPCs.get(i);
+            npc.destroy();
+        }
+        statueNPCs.clear();
+
+        for(Integer i : statueAs.keySet()){
+            Entity entity = statueAs.get(i);
+            entity.remove();
+        }
+        statueAs.clear();
+
+        for(Integer i : statueLocations.keySet()){
+            Location spawn;
+            spawn = statueLocations.get(i);
+            final String name = statueNames.get(i);
+            ItemStack item = statueItem.get(i);
+            final NPC npc = registry.createNPC(EntityType.PLAYER, name);
+            npc.spawn(spawn.add(0.5, 0, 0.5));
+            npc.teleport(spawn.add(-0.5, 0, -0.5), PlayerTeleportEvent.TeleportCause.COMMAND);
+            npc.getBukkitEntity().getEquipment().setItemInHand(item);
+            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "npc select " + npc.getId());
+            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "npc lookclose");
+            final ArmorStand as = (ArmorStand) Bukkit.getWorld("Minigames").spawnEntity(spawn, EntityType.ARMOR_STAND);
+            as.setVisible(false);
+            as.setSmall(true);
+            statueNPCs.put(i, npc);
+            statueAs.put(i, as);
+
+            Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable() {
+                @Override
+                public void run() {
+                    npc.getEntity().setPassenger(as);
+                    statueRide.put(npc.getEntity(), name);
+                    if(name.equals("ThoThoKill")){
+                        npc.getBukkitEntity().getEquipment().setHelmet(InventoryUtils.colorArmor(Material.LEATHER_HELMET, 1, 0, null, null, Color.RED));
+                        npc.getBukkitEntity().getEquipment().setChestplate(InventoryUtils.colorArmor(Material.LEATHER_CHESTPLATE, 1, 0, null, null, Color.RED));
+                        npc.getBukkitEntity().getEquipment().setBoots(InventoryUtils.colorArmor(Material.LEATHER_BOOTS, 1, 0, null, null, Color.RED));
+                    }
+                }
+            },100);
+        }
     }
 
     public static void clearLobby() { //TODO: Make statement working
