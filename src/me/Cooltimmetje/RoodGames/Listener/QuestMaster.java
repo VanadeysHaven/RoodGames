@@ -18,10 +18,8 @@ public class QuestMaster implements Listener {
     public void onQuestMasterInteract(PlayerInteractEntityEvent event){
         Player p = event.getPlayer();
         if(event.getRightClicked() instanceof Villager) {
-            if (LobbyUtils.isQM.containsKey(event.getRightClicked())) {
-                if (LobbyUtils.isQM.get(event.getRightClicked())) {
+            if (LobbyUtils.isQM.contains(event.getRightClicked())) {
                     ChatUtils.msgPlayer("&8[&eQuest Master&8] &eVillager_" + MiscUtils.randomInt(1, 100) + " &8» &fHmmm...", p);
-                }
             } else {
                 return;
             }

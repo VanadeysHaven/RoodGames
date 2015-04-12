@@ -14,14 +14,10 @@ public class StaffNpcMount implements Listener{
     @EventHandler
     public void onStaffNpcInteract(PlayerInteractEntityEvent event) {
         Player p = event.getPlayer();
-        if (LobbyUtils.isStaffNPC.containsKey(event.getRightClicked())) {
-            if (LobbyUtils.isStaffNPC.get(event.getRightClicked())) {
-                if(LobbyUtils.staffNPC.get(event.getRightClicked()).equals(p.getName())){
-                    event.getRightClicked().getPassenger().setPassenger(p);
-                }
+        if(LobbyUtils.statueRide.containsKey(event.getRightClicked())) {
+            if (LobbyUtils.statueRide.get(event.getRightClicked()).equals(p.getName())) {
+                event.getRightClicked().getPassenger().setPassenger(p);
             }
-        } else {
-            return;
         }
     }
 
