@@ -25,10 +25,8 @@ public class MysteryBoxInfo implements Listener {
     @EventHandler
     public void onEntityInteractEvent(PlayerInteractEntityEvent event){
         Player p = event.getPlayer();
-        if(LobbyUtils.isMI.containsKey(event.getRightClicked())){
-            if(LobbyUtils.isMI.get(event.getRightClicked())){
+        if(LobbyUtils.isMI.contains(event.getRightClicked())){
                 openMysteryInfo(p);
-            }
         }
     }
 
