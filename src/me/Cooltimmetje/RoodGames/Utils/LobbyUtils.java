@@ -143,7 +143,7 @@ public class LobbyUtils {
     static CharsBuilder east;
     static CharsString eastText;
 
-    public static void setupLobby() { //TODO: Make statement working
+    public static void setupLobby() {
         registerQuestMasters();
         for(Integer i : qmLocations.keySet()){
             Location spawn = qmLocations.get(i);
@@ -256,7 +256,7 @@ public class LobbyUtils {
         }
     }
 
-    public static void setGame(int game, Player p) { //TODO: Make statement working
+    public static void setGame(int game, Player p) {
         if(game > 0 && game <= GameList.gameAmount){
             gameNameText.clearChars(true);
             gameNameText = gameName.replace("$l#c&d" + GameList.idGame.get(game));
@@ -267,7 +267,7 @@ public class LobbyUtils {
         }
     }
 
-    public static void reloadStatues() { //TODO: Make statement working
+    public static void reloadStatues() {
         for(Integer i : statueNPCs.keySet()){
             NPC npc = statueNPCs.get(i);
             npc.destroy();
@@ -312,7 +312,7 @@ public class LobbyUtils {
         }
     }
 
-    public static void clearLobby() { //TODO: Make statement working
+    public static void clearLobby() {
         for(Integer i : qmNPCs.keySet()){
             NPC npc = qmNPCs.get(i);
             npc.destroy();
