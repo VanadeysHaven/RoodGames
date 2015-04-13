@@ -33,9 +33,9 @@ public class MysteryBoxInfo implements Listener {
     private void openMysteryInfo(Player p) {
         Inventory inv = Bukkit.createInventory(null, 9, "Mystery Box Info");
 
-        InventoryUtils.createDisplay(Material.CHEST, 1, 0, "&eCommon Box Info", "&7Click to learn more about the Common Chest.", inv, 3);
-        InventoryUtils.createDisplay(Material.TRAPPED_CHEST, 1, 0, "&eRare Box Info", "&7Click to learn more about the Rare Chest.", inv, 5);
-        InventoryUtils.createDisplay(Material.ENDER_CHEST, 1, 0, "&eLegendary Box Info", "&7Click to learn more about the Legendary Chest.", inv, 7);
+        InventoryUtils.createDisplay(Material.CHEST, 1, 0, "&eCommon Box Info", "&7Click to learn more about the Common Box.", inv, 3);
+        InventoryUtils.createDisplay(Material.TRAPPED_CHEST, 1, 0, "&eRare Box Info", "&7Click to learn more about the Rare Box.", inv, 5);
+        InventoryUtils.createDisplay(Material.ENDER_CHEST, 1, 0, "&eLegendary Box Info", "&7Click to learn more about the Legendary Box.", inv, 7);
 
          p.openInventory(inv);
     }
@@ -83,6 +83,9 @@ public class MysteryBoxInfo implements Listener {
             }
 
             switch (event.getCurrentItem().getType()) {
+                case ARROW:
+                    openMysteryInfo(p);
+                    break;
                 default:
                     break;
             }
@@ -94,6 +97,7 @@ public class MysteryBoxInfo implements Listener {
 
     private void openLegendaryInfo(Player p) {
         Inventory inv = Bukkit.createInventory(null, 9, "Legendary Box Info");
+        InventoryUtils.createDisplay(Material.ARROW, 1, 0, "&cGo back", null, inv, 1);
 
         InventoryUtils.createDisplay(Material.ENDER_CHEST, 1, 0, "&eHow to obtain", "&7You can obtain a Legendary Box by:", inv, 4);
         InventoryUtils.createDisplay(Material.DIAMOND, 1, 0, "&eRewards", "&7A Legendary Box can contain:", inv, 6);
@@ -103,6 +107,7 @@ public class MysteryBoxInfo implements Listener {
 
     private void openRareInfo(Player p) {
         Inventory inv = Bukkit.createInventory(null, 9, "Rare Box Info");
+        InventoryUtils.createDisplay(Material.ARROW, 1, 0, "&cGo back", null, inv, 1);
 
         InventoryUtils.createDisplay(Material.TRAPPED_CHEST, 1, 0, "&eHow to obtain", "&7You can obtain a Rare Box by:", inv, 4);
         InventoryUtils.createDisplay(Material.DIAMOND, 1, 0, "&eRewards", "&7A Rare Box can contain:", inv, 6);
@@ -112,19 +117,34 @@ public class MysteryBoxInfo implements Listener {
 
     private void openCommonInfo(Player p) {
         Inventory inv = Bukkit.createInventory(null, 9, "Common Box Info");
+        InventoryUtils.createDisplay(Material.ARROW, 1, 0, "&cGo back", null, inv, 1);
 
         ItemStack obtain = new ItemStack(Material.CHEST);
         ItemMeta obtainMeta = obtain.getItemMeta();
         obtainMeta.setDisplayName(MiscUtils.color("&eHow to obtain"));
         ArrayList<String> obtainLore = new ArrayList<String>();
         obtainLore.add(MiscUtils.color("&7You can obtain a Common Box by:"));
-        obtainLore.add(MiscUtils.color("&b- &3Play games: &8&o1 in 10 chance to get 1 &f/ &8&o1 in 100 chance to get 2")); //TODO: Chance
+        obtainLore.add(MiscUtils.color("&b- &3Play games: &8&o10% chance to get 1 &f/ &8&o1% chance to get 2")); //TODO: Chance
         obtainLore.add(MiscUtils.color("&b- &3Buy one: &8&oOne box costs: &6&o100 coins")); //TODO: Price
+        obtainLore.add(MiscUtils.color("&b- &3Do quests: &8&oAmount depends on quest"));
+        obtainLore.add(MiscUtils.color("&b- &3Get them: &8&oOther players can give their boxes to you!"));
         obtainMeta.setLore(obtainLore);
         obtain.setItemMeta(obtainMeta);
         inv.setItem(4 - 1, obtain);
 
-        InventoryUtils.createDisplay(Material.DIAMOND, 1, 0, "&eRewards", "&7A Common Box can contain:", inv, 6);
+        ItemStack reward = new ItemStack(Material.DIAMOND);
+        ItemMeta rewardMeta = reward.getItemMeta();
+        rewardMeta.setDisplayName(MiscUtils.color("&eRewards"));
+        ArrayList<String> rewardLore = new ArrayList<String>();
+        rewardLore.add(MiscUtils.color("&7A Common Box can contain:"));
+        rewardLore.add(MiscUtils.color("&b- &3Armor: &8&oOnly leather and chain. 10% chance for any piece!"));
+        rewardLore.add(MiscUtils.color("&b- &3Gadgets: &8&o10% chance for any Gadget!"));
+        rewardLore.add(MiscUtils.color("&b- &3Ammo: &8&o20% chance for 1 - 50 ammo for any ammo gadget!"));
+        rewardLore.add(MiscUtils.color("&b- &3Rare Box: &8&o5% chance for 1 box"));
+        rewardLore.add(MiscUtils.color("&b- &3Coins: &8&o55% chance for 100 - 1000 coins."));
+        rewardMeta.setLore(rewardLore);
+        reward.setItemMeta(rewardMeta);
+        inv.setItem(6 - 1, reward);
 
         p.openInventory(inv);
     }

@@ -7,7 +7,7 @@ import java.util.HashMap;
  */
 public class GameList {
 
-    public static int gameAmount = 5;
+    public static int gameAmount = 6;
 
     public static HashMap<String, Integer> gameID = new HashMap<String, Integer>();
     public static HashMap<Integer, String> idGame = new HashMap<Integer, String>();
@@ -18,12 +18,14 @@ public class GameList {
         gameID.put("Survival Games", 3);
         gameID.put("PVP - Team VS Team", 4);
         gameID.put("PVP - Solo", 5);
+        gameID.put("Kill the Redhead", 6);
 
         idGame.put(1, "TNT Run");
         idGame.put(2, "TNT Tag");
         idGame.put(3, "Survival Games");
         idGame.put(4, "PVP - Team VS Team");
         idGame.put(5, "PVP - Solo");
+        idGame.put(6, "Kill the Redhead");
     }
 
 }

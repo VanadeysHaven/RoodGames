@@ -18,6 +18,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SkullMeta;
 import pl.merbio.charsapi.objects.CharsBuilder;
 import pl.merbio.charsapi.objects.CharsString;
 
@@ -46,6 +47,8 @@ public class LobbyUtils {
         public static HashMap<Integer, NPC> miNPCs = new HashMap<Integer, NPC>();
         public static HashMap<Integer, Hologram> miHolos = new HashMap<Integer, Hologram>();
         public static HashMap<Integer, Hologram> mbHolos = new HashMap<Integer, Hologram>();
+        public static HashMap<Integer, Location> mbLocations = new HashMap<Integer, Location>();
+        public static HashMap<Integer, Integer> mbFacing = new HashMap<Integer, Integer>();
         //Statue HashMaps
         public static HashMap<Integer, Location> statueLocations = new HashMap<Integer, Location>();
         public static HashMap<Integer, Location> statueHoloLocations = new HashMap<Integer, Location>();
@@ -69,14 +72,14 @@ public class LobbyUtils {
     //Questmaster Data
         //Questmaster Faceing
         static Location questMasterFace1 = Bukkit.getWorld("Minigames").getBlockAt(-6, 86, -6).getLocation();
-        static Location questMasterFace2 = Bukkit.getWorld("Minigames").getBlockAt(6, 86 ,-6).getLocation();
+        static Location questMasterFace2 = Bukkit.getWorld("Minigames").getBlockAt(6, 86, -6).getLocation();
         static Location questMasterFace3 = Bukkit.getWorld("Minigames").getBlockAt(6, 86, 6).getLocation();
-        static Location questMasterFace4 = Bukkit.getWorld("Minigames").getBlockAt(-6, 86 , 6).getLocation();
+        static Location questMasterFace4 = Bukkit.getWorld("Minigames").getBlockAt(-6, 86, 6).getLocation();
         //Questmaster Locations
-        static Location questMasterLoc1 = Bukkit.getWorld("Minigames").getBlockAt(-7, 85 ,-7).getLocation();
+        static Location questMasterLoc1 = Bukkit.getWorld("Minigames").getBlockAt(-7, 85, -7).getLocation();
         static Location questMasterLoc2 = Bukkit.getWorld("Minigames").getBlockAt(7, 85, -7).getLocation();
-        static Location questMasterLoc3 = Bukkit.getWorld("Minigames").getBlockAt(7, 85 , 7).getLocation();
-        static Location questMasterLoc4 = Bukkit.getWorld("Minigames").getBlockAt(-7, 85 , 7).getLocation();
+        static Location questMasterLoc3 = Bukkit.getWorld("Minigames").getBlockAt(7, 85, 7).getLocation();
+        static Location questMasterLoc4 = Bukkit.getWorld("Minigames").getBlockAt(-7, 85, 7).getLocation();
         //Questmaster Holo Locations
         static Location questHoloLoc1 = Bukkit.getWorld("Minigames").getBlockAt(-7, 88, -7).getLocation();
         static Location questHoloLoc2 = Bukkit.getWorld("Minigames").getBlockAt(7, 88, -7).getLocation();
@@ -90,7 +93,7 @@ public class LobbyUtils {
         static Location chest3 = Bukkit.getWorld("Minigames").getBlockAt(-13, 85, 13).getLocation();
         static Location chest4 = Bukkit.getWorld("Minigames").getBlockAt(-13, 85, -13).getLocation();
         //Mystery Villager Locations
-        static Location mysteryInfoLoc1 = Bukkit.getWorld("Minigames").getBlockAt(15, 82 ,-12).getLocation();
+        static Location mysteryInfoLoc1 = Bukkit.getWorld("Minigames").getBlockAt(15, 82, -12).getLocation();
         static Location mysteryInfoLoc2 = Bukkit.getWorld("Minigames").getBlockAt(12, 82, 15).getLocation();
         static Location mysteryInfoLoc3 = Bukkit.getWorld("Minigames").getBlockAt(-15, 82, 12).getLocation();
         static Location mysteryInfoLoc4 = Bukkit.getWorld("Minigames").getBlockAt(-12, 82, -15).getLocation();
@@ -104,6 +107,16 @@ public class LobbyUtils {
         static Location mysteryInfoHolo2 = Bukkit.getWorld("Minigames").getBlockAt(12, 85, 15).getLocation();
         static Location mysteryInfoHolo3 = Bukkit.getWorld("Minigames").getBlockAt(-15, 85, 12).getLocation();
         static Location mysteryInfoHolo4 = Bukkit.getWorld("Minigames").getBlockAt(-12, 85, -15).getLocation();
+        //Mystery Box Locations
+        static Location boxLocation1 = Bukkit.getWorld("Minigames").getBlockAt(13, 83, -13).getLocation();
+        static Location boxLocation2 = Bukkit.getWorld("Minigames").getBlockAt(13, 83, 13).getLocation();
+        static Location boxLocation3 = Bukkit.getWorld("Minigames").getBlockAt(-13, 83, 13).getLocation();
+        static Location boxLocation4 = Bukkit.getWorld("Minigames").getBlockAt(-13, 83, -13).getLocation();
+        //Mystery Box Facing
+        static int boxFace1 = 2;
+        static int boxFace2 = 5;
+        static int boxFace3 = 3;
+        static int boxFace4 = 4;
 
     //Statue Data
         static Location cooltimmetjeLoc = Bukkit.getWorld("Minigames").getBlockAt(-35, 82 ,0).getLocation();
@@ -124,6 +137,16 @@ public class LobbyUtils {
         static String swagyoloLore = "&dBRUH";
         static ItemStack swagyoloItem = new ItemStack(Material.IRON_SWORD);
 
+        static Location reloadHoloLoc = Bukkit.getWorld("Minigames").getBlockAt(-28, 82, 0).getLocation();
+        static String reloadHolo1 = "&eStatues not working properly?";
+        static String reloadHolo2 = "&6&o/reloadstatues";
+
+        static Location regesLoc = Bukkit.getWorld("Minigames").getBlockAt(-30, 81, -5).getLocation();
+        static Location regesHoloLoc = Bukkit.getWorld("Minigames").getBlockAt(-29, 82, -5).getLocation();
+        static String regesName = "Reges";
+        static String regesLore = "&2MAND";
+        static ItemStack regesItem = new ItemStack(Material.DEAD_BUSH);
+
     //Hologram Strings
     static String chestName = "&eMystery Box";
     static String soonTM = "&7Coming SoonTM";
@@ -136,6 +159,8 @@ public class LobbyUtils {
     static CharsString serverNameText;
     static CharsBuilder gameName;
     static CharsString gameNameText;
+    static CharsBuilder status;
+    static CharsString statusText;
     static CharsBuilder staffName;
     static CharsString staffNameText;
     static CharsBuilder south;
@@ -191,13 +216,25 @@ public class LobbyUtils {
             mbHolos.put(i, hologram);
         }
 
+        for(Integer i : mbLocations.keySet()){
+            Location box = mbLocations.get(i);
+            int face = mbFacing.get(i);
+            Block block = Bukkit.getWorld("Minigames").getBlockAt(box);
+            block.setType(Material.ENDER_CHEST);
+            block.setData((byte) face);
+        }
+
         serverName = new CharsBuilder();
         serverNameText = serverName.replace("$l#c&4R00D$l#c&eGames");
-        serverNameText = serverName.build(centerLobby.getLocation().add(0, 16, -51),BlockFace.NORTH , serverNameText);
+        serverNameText = serverName.build(centerLobby.getLocation().add(0, 22, -52),BlockFace.NORTH , serverNameText);
 
         gameName = new CharsBuilder();
         gameNameText = gameName.replace("$l#c&7No Game Selected");
-        gameNameText = gameName.build(centerLobby.getLocation().add(0, 10, -50), BlockFace.NORTH, gameNameText);
+        gameNameText = gameName.build(centerLobby.getLocation().add(0, 16, -51), BlockFace.NORTH, gameNameText);
+
+        status = new CharsBuilder();
+        statusText = gameName.replace("$l#c&7No Game Selected");
+        statusText = gameName.build(centerLobby.getLocation().add(0, 16, -50), BlockFace.NORTH, statusText);
 
         staffName = new CharsBuilder();
         staffNameText = staffName.replace("$l#c&2Staff and Friends");
@@ -245,7 +282,12 @@ public class LobbyUtils {
             Location spawn = statueHoloLocations.get(i);
             String name = statueNames.get(i);
             String lore = statueLores.get(i);
-            Hologram hologram = HologramsAPI.createHologram(Main.getPlugin(), spawn.add(0.5, -0.5, 0.5));
+            Hologram hologram;
+            if(i == 4){
+                hologram = HologramsAPI.createHologram(Main.getPlugin(), spawn.add(0.5, -0.3, 0.5));
+            } else {
+                hologram = HologramsAPI.createHologram(Main.getPlugin(), spawn.add(0.5, -0.5, 0.5));
+            }
             if(name.equals("ThoThoKill")) {
                 hologram.appendTextLine(MiscUtils.color("&4" + name));
             } else {
@@ -366,6 +408,7 @@ public class LobbyUtils {
         staffNameText.clearChars(true);
         southText.clearChars(true);
         eastText.clearChars(true);
+
     }
 
     public static void registerMysteryBox() {
@@ -392,6 +435,18 @@ public class LobbyUtils {
             mbHoloLocations.put(2, chest2);
             mbHoloLocations.put(3, chest3);
             mbHoloLocations.put(4, chest4);
+        }
+        if(mbLocations.isEmpty()){
+            mbLocations.put(1, boxLocation1);
+            mbLocations.put(2, boxLocation2);
+            mbLocations.put(3, boxLocation3);
+            mbLocations.put(4, boxLocation4);
+        }
+        if(mbFacing.isEmpty()){
+            mbFacing.put(1, boxFace1);
+            mbFacing.put(2, boxFace2);
+            mbFacing.put(3, boxFace3);
+            mbFacing.put(4, boxFace4);
         }
     }
 
@@ -424,26 +479,34 @@ public class LobbyUtils {
             statueLocations.put(1, cooltimmetjeLoc);
             statueLocations.put(2, thothokillLoc);
             statueLocations.put(3, swagyoloLoc);
+            statueLocations.put(4, regesLoc);
         }
         if (statueHoloLocations.isEmpty()) {
             statueHoloLocations.put(1, cooltimmetjeHoloLoc);
             statueHoloLocations.put(2, thothokillHoloLoc);
             statueHoloLocations.put(3, swagyoloHoloLoc);
+            statueHoloLocations.put(4, regesHoloLoc);
+            statueHoloLocations.put(5, reloadHoloLoc);
         }
         if(statueNames.isEmpty()){
             statueNames.put(1, cooltimmetjeName);
             statueNames.put(2, thothokillName);
             statueNames.put(3, swagyoloName);
+            statueNames.put(4, regesName);
+            statueNames.put(5, reloadHolo1);
         }
         if(statueLores.isEmpty()){
             statueLores.put(1, cooltimmetjeLore);
             statueLores.put(2, thothokillLore);
             statueLores.put(3, swagyoloLore);
+            statueLores.put(4, regesLore);
+            statueLores.put(5, reloadHolo2);
         }
         if(statueItem.isEmpty()){
             statueItem.put(1, cooltimmetjeItem);
             statueItem.put(2, thothokillItem);
             statueItem.put(3, swagyoloItem);
+            statueItem.put(4, regesItem);
         }
     }
 }

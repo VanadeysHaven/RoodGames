@@ -13,3 +13,5 @@ commands:
         description: resetinv
     createbeacon:
         description: createbeacon
+    gamelist:
+        description: gamelist
